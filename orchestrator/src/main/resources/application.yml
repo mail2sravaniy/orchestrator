@@ -1,0 +1,55 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: service1-orchestrator
+  profiles:
+    active: local
+
+# Service URLs
+service2:
+  url: ${SERVICE2_URL:http://localhost:8082}
+service3:
+  url: ${SERVICE3_URL:http://localhost:8083}
+
+# Logging
+logging:
+  level:
+    com.microservice.orchestrator: INFO
+    org.springframework.web: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{36} - %msg%n"
+
+# Swagger
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+service2:
+  url: ${SERVICE2_URL:http://service2:8082}
+service3:
+  url: ${SERVICE3_URL:http://service3:8083}
+
+logging:
+  level:
+    com.microservice.orchestrator: INFO
+    org.springframework.web: INFO
