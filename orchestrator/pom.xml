@@ -12,7 +12,7 @@
 	<artifactId>orchestrator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>orchestrator</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Main orchestration service for microservice communication</description>
 	<url/>
 	<licenses>
 		<license/>
